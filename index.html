@@ -1,0 +1,61 @@
+
+<br/>
+<br/>
+<br/>
+<div class="target-container">
+  <div class="target"> Animation.js </div>
+</div>
+<br/>
+<br/>
+<br/>
+
+<div class="selection">
+  <div class="duration">
+    <b>Duration(ms)</b>
+    <select name="duration" onchange="run()"></select>
+  </div>
+  <div class="timing">
+    <b>Timing</b>
+    <select name="timing" onchange="run()"></select>
+  </div>
+  <div class="draw">
+    <b>Draw Function</b>
+    <select name="draw" onchange="run()"></select>
+  </div>
+</div>
+
+<h3>Basic Example</h3>
+<pre>import {<b class="ani">fadeIn</b>} from 'animations.js';
+<b class="ani">fadeIn</b>(el);
+</pre>
+
+<h3>Custom setting to control timing and duration</h3>
+For a website, it's recommened to have the same duration and timing function for all animations.
+<pre>import {Animation} from 'animations.js';
+Animation.DURATION = 1000;
+Animation.TIMING = 'ease-in-out';
+</pre>
+
+<h3>For Fully Customed Animation</h3>
+To fully control your animation, run `animate` function
+<pre>
+import {animate} from 'animations.js';
+
+const el = document.querySelector('.target');
+
+// run draw function only
+animate(pct => el.style.opacity = pct);
+
+// or durarion, timing as string, and draw function
+animate(1000, 'ease-in-out', pct => el.style.opacity = pct);
+
+// or or durarion, timing function, and draw function
+animate(
+  1000,                          // DURATION
+  t => Math.pow(t, 1.675),       // timing function
+  pct => el.style.opacity = pct  // draw function  
+)
+.then(_ => el.removeAttribute('style'));
+
+</pre>
+
