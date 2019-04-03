@@ -23,5 +23,8 @@ export const slideInBottom =  el => __ani(el, drawFns.slideInBottom);
 export const slideOutBottom =  el => __ani(el, drawFns.slideOutBottom);
 export const zoomIn =  el => __ani(el, drawFns.zoomIn);
 export const zoomOut =  el => __ani(el, drawFns.zoomOut);
+export const rotateIn =  el => __ani(el, drawFns.rotateIn);
+export const rotateOut =  el => __ani(el, drawFns.rotateIn);
+
 export {animate} from './animate'
 export const Animation = Animation;
