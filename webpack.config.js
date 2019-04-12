@@ -10,14 +10,14 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 let config = {
   mode: 'none',
   entry: [
-    './src/index.js'
+    './src/index.js',
   ],
   optimization: {
     minimizer: [new UglifyJsPlugin({
       sourceMap: true,
       uglifyOptions: {
-        compress: {warnings: false}
-      }
+        compress: {warnings: false},
+      },
     })],
   },
   output: {
@@ -25,7 +25,7 @@ let config = {
     filename: 'animation.umd.js',
     library: pkgJson.name,
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
   module: {
     rules: [
@@ -33,25 +33,25 @@ let config = {
       {test: /\.css$/, loader: 'raw-loader'},
       {test: /\.js$/,
         exclude: /(node_modules|or_any)/,
-        use: {loader: 'babel-loader', options: {presets: ['@babel/preset-env']}}
-      }
-    ]
+        use: {loader: 'babel-loader', options: {presets: ['@babel/preset-env']}},
+      },
+    ],
   },
   devtool: '#source-map',
   plugins: [
-    new CleanWebpackPlugin(['dist/*'])
-  ]
+    new CleanWebpackPlugin(['dist/*']),
+  ],
 };
 
 if (process.env.ENV === 'demo') {
   console.log('[webpack-dev-server] mode', process.env.ENV);
   config = Object.assign(config, {
     entry: {
-      app: './demo'
+      app: './demo',
     },
     output: {
       path: path.resolve(__dirname, './docs'),
-      filename: '[name].js'
+      filename: '[name].js',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
@@ -60,10 +60,10 @@ if (process.env.ENV === 'demo') {
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'demo/index.html',
-        inject: true
+        inject: true,
       }),
-      new CopyWebpackPlugin(['demo/*.html', 'demo/*.css', '!demo/index.html'])
-    ]
+      new CopyWebpackPlugin(['demo/*.html', 'demo/**/*', '!demo/index.html']),
+    ],
   });
 }
 

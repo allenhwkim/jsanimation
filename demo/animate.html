@@ -1,0 +1,24 @@
+<h2>`animate` function</h2>
+
+To fully control your animation, run `animate` function
+
+<pre>
+import {animate} from 'animations.js';
+
+const el = document.querySelector('.target');
+
+// run draw function only
+animate(pct => el.style.opacity = pct);
+
+// or durarion, timing as string, and draw function
+animate(1000, 'ease-in-out', pct => el.style.opacity = pct);
+
+// or or durarion, timing function, and draw function
+animate(
+  1000,                          // DURATION
+  t => Math.pow(t, 1.675),       // timing function
+  pct => el.style.opacity = pct  // draw function  
+)
+.then(_ => el.removeAttribute('style'));
+
+</pre>

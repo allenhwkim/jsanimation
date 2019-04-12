@@ -1,16 +1,19 @@
+<style>
+.target-container {padding: 40px 0; text-align: center;}
+.target { font-size: 64px; display: inline-block; width: 100%; color: orange; }
+.selection { display: flex; }
+.selection > * { padding: 4px; flex-grow: 1; flex-basis: 0; }
+.selection select { border: none; width: 100%; font-size: 0.85em; outline: 0; }
+.show-more, .show-less { display: none; }
+.show-more.visible, .show-less.visible { display: block; }
+</style>
 
-<br/>
-<br/>
-<br/>
 <div class="target-container">
   <div class="target"> Animation.js </div>
 </div>
-<br/>
-<br/>
-<br/>
 
 <div class="selection">
-  <div class="duration">
+  <div class="duration-ms">
     <b>Duration(ms)</b>
     <select name="duration" onchange="run()"></select>
   </div>
@@ -24,64 +27,17 @@
   </div>
 </div>
 
-<h3>Basic Example</h3>
-<pre>import {<b class="ani">fadeIn</b>} from 'animations.js';
-<b class="ani">fadeIn</b>(el);
+<a href="javascript:toggleShow()" style="position: relative; bottom: -12px">more/less</a>
+<pre class="show-less visible">
+import {<b class="draw-fn">fadeIn</b>} from 'animation.js';
+<b class="draw-fn">fadeIn</b>(el);
 </pre>
 
-<h3>Custom setting to control timing and duration</h3>
-For a website, it's recommened to have the same duration and timing function for all animations.
-<pre>import {Animation} from 'animations.js';
-Animation.DURATION = 1000;
-Animation.TIMING = 'ease-in-out';
+<pre class="show-more">
+import {Animation, <b class="draw-fn">fadeIn</b>} from 'animation.js';
+Animation.DURATION = <b class="duration">250</b>; // optional, default 250
+Animation.TIMING = '<b class="timing-fn">ease-in-out</b>'; // optional, default 'ease-in-out'
+<b class="draw-fn">fadeIn</b>(el);
 </pre>
 
-<h3>For Fully Customed Animation</h3>
-To fully control your animation, run `animate` function
-<pre>
-import {animate} from 'animations.js';
-
-const el = document.querySelector('.target');
-
-// run draw function only
-animate(pct => el.style.opacity = pct);
-
-// or durarion, timing as string, and draw function
-animate(1000, 'ease-in-out', pct => el.style.opacity = pct);
-
-// or or durarion, timing function, and draw function
-animate(
-  1000,                          // DURATION
-  t => Math.pow(t, 1.675),       // timing function
-  pct => el.style.opacity = pct  // draw function  
-)
-.then(_ => el.removeAttribute('style'));
-
-</pre>
-
-<!--
-<p>
-  This is MyClass saying "<span id="hello"></span>".
-</p>
-
-<h3>Attributes</h3>
-<ul>
-  <li><b>foo</b>: Default null. xxxxxxxxxxxxxxxx.</li>
-  <li><b>bar</b>: Default null. xxxxxxxxxxxxxxxx.</li>
-</ul>
-
-<h3>Example</h3>
-<div class="x1">
-  This is html example
-</div>
-<style class="x1">
-  div.x1 { padding: 12px; border: 1px solid #ccc; }
-</style>
-<script class="x1">
-  document.querySelector('#hello').innerHTML = (new MyClass()).helloWorld();
-</script>
-<script>
-  showCode('div.x1', 'style.x1', 'script.x1', /example/g);
-</script>
--->
-
+<script src="demo/home.js"></script>

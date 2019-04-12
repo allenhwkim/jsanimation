@@ -24,8 +24,8 @@ window.showCode = function(htmlId, jsId, cssId, highlight) {
       dstEl = el.querySelector(`.hce-contents [tab=${type}] pre`);
       const lang = type === 'js' ? 'javascript': type;
       html = Prism.highlight(srcEl.innerHTML.replace(/^\n(\s+)/, '$1'), Prism.languages[lang], lang);
-      html = html.replace(/hce-[\w-]+/g, $0 => `<b>${$0}</b>`);
-      highlight && ( html = html.replace(highlight, $0 => `<b>${$0}</b>`) );
+      html = html.replace(/hce-[\w-]+/g, ($0) => `<b>${$0}</b>`);
+      highlight && ( html = html.replace(highlight, ($0) => `<b>${$0}</b>`) );
       dstEl.innerHTML = html;
     } else {
       el.querySelector(`.hce-tabs [tab=${type}]`).remove();

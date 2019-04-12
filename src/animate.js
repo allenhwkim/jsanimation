@@ -7,33 +7,61 @@ function draw(el, transform, opacity) {
 }
 
 export const drawFns = {
-  fadeIn: function(pct) {this.style.opacity = pct;},
-  fadeOut: function(pct) {this.style.opacity = 1-pct;},
-  slideInLeft: 
-    function(pct) {draw(this,`translateX(${-100+pct*100}%)`, pct);},
-  slideOutLeft: 
-    function(pct) {draw(this,`translateX(${-1*pct*100}%)`, 1-pct);},
-  slideInRight: 
-    function(pct) {draw(this,`translateX(${100 - pct*100}%)`, pct);},
-  slideOutRight: 
-    function(pct) {draw(this,`translateX(${1*pct*100}%)`, 1-pct);},
-  slideInTop: 
-    function(pct) {draw(this, `translateY(${-100+pct*100}%)`, pct);},
-  slideOutTop: 
-    function(pct) {draw(this,`translateY(${-1*pct*100}%)`, 1-pct);},
-  slideInBottom: 
-    function(pct) {draw(this,`translateY(${100 - pct*100}%)`, pct);},
-  slideOutBottom: 
-    function(pct) {draw(this, `translateY(${1*pct*100}%)`, 1-pct);},
-  zoomIn: 
-    function(pct) {draw(this,`scale(${pct})`, pct);},
-  zoomOut: 
-    function(pct) {draw(this,`scale(${1-pct})`, 1-pct);},
+  fadeIn: function(pct) {
+    this.style.opacity = pct;
+  },
+  fadeOut: function(pct) {
+    this.style.opacity = 1-pct;
+  },
+  slideInLeft:
+    function(pct) {
+      draw(this, `translateX(${-100+pct*100}%)`, pct);
+    },
+  slideOutLeft:
+    function(pct) {
+      draw(this, `translateX(${-1*pct*100}%)`, 1-pct);
+    },
+  slideInRight:
+    function(pct) {
+      draw(this, `translateX(${100 - pct*100}%)`, pct);
+    },
+  slideOutRight:
+    function(pct) {
+      draw(this, `translateX(${1*pct*100}%)`, 1-pct);
+    },
+  slideInTop:
+    function(pct) {
+      draw(this, `translateY(${-100+pct*100}%)`, pct);
+    },
+  slideOutTop:
+    function(pct) {
+      draw(this, `translateY(${-1*pct*100}%)`, 1-pct);
+    },
+  slideInBottom:
+    function(pct) {
+      draw(this, `translateY(${100 - pct*100}%)`, pct);
+    },
+  slideOutBottom:
+    function(pct) {
+      draw(this, `translateY(${1*pct*100}%)`, 1-pct);
+    },
+  zoomIn:
+    function(pct) {
+      draw(this, `scale(${pct})`, pct);
+    },
+  zoomOut:
+    function(pct) {
+      draw(this, `scale(${1-pct})`, 1-pct);
+    },
   rotateIn:
-    function(pct) {draw(this,`rotate(${-180 + pct * 180}deg)`, pct);},
+    function(pct) {
+      draw(this, `rotate(${-180 + pct * 180}deg)`, pct);
+    },
   rotateOut:
-    function(pct) {draw(this,`rotate(${pct * 180 * -1}deg)`, 1-pct);}
-}
+    function(pct) {
+      draw(this, `rotate(${pct * 180 * -1}deg)`, 1-pct);
+    },
+};
 
 export function animate(duration, timing, draw) {
   duration = duration || 250;
