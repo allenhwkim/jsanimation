@@ -1,0 +1,9 @@
+body { margin: 24px; }
+.main {display: flex;}
+.table-of-contents, .contents  {padding: 12px;}
+pre {font-size: 14px; background: #eee;}
+hce-tabs {padding: 24px;} 
+hce-tabs .contents pre {margin: 0; padding: 12px; white-space: pre-wrap;}
+div[contents-for] b, pre b {background: rgba(255, 255, 0, 0.3); padding: 0 4px;}
+hce-dyn-contents { max-width: 800px; margin: 0 auto; }
+

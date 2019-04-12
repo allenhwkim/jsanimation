@@ -10,7 +10,7 @@
     "stop": "kill-port 8080",
     "test": "jest --coverage=true",
     "serve": "ENV=demo webpack-dev-server --port 8080 &",
-    "eslint": "eslint . --fix",
+    "eslint": "eslint src demo --fix",
     "build": "npm-run-all build:prod build:demo",
     "build:prod": "webpack --progress --hide-modules",
     "build:demo": "ENV=demo webpack --progress --hide-modules"
