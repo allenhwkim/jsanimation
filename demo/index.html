@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="demo/normalize.css" />
+    <link rel="stylesheet" href="demo/prism.css" />
+    <script src="demo/util.js"></script>
+    <style>
+      body { margin: 24px; }
+      .main {display: flex;}
+      .table-of-contents, .contents  {padding: 12px;}
+      hce-tabs {padding: 24px;} 
+      hce-tabs .contents pre {margin: 0; padding: 12px; white-space: pre-wrap;}
+      div[contents-for] b, pre b {background: rgba(255, 255, 0, 0.3); padding: 0 4px;}
+    </style>
+  </head>
+  <body>
+    <h1>My Javascript Package</h1>
+    <div class="main">
+      <ul class="table-of-contents">
+        <li><a href="#home">home</a></li>
+      </ul>
+
+      <hce-dyn-contents class="contents">
+        <div url-match="^/$" import="demo/home.html"></div>
+        <div url-match="home" import="demo/home.html"></div>
+      </hce-dyn-contents>
+    </div>
+    
+  </body>
+</html>
+

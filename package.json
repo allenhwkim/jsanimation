@@ -1,6 +1,57 @@
 {
-  "name": "js-4uuwph",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {}
+  "name": "animation.js",
+  "description": "Simple Javascript Animation",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/animation.umd.js",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "start": "npm-run-all stop serve",
+    "stop": "kill-port 8080",
+    "test": "jest --coverage=true",
+    "serve": "ENV=demo webpack-dev-server --port 8080 &",
+    "eslint": "eslint . --fix",
+    "build": "npm-run-all build:prod build:demo",
+    "build:prod": "webpack --progress --hide-modules",
+    "build:demo": "ENV=demo webpack --progress --hide-modules"
+  },
+  "pre-commit": "eslint",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenhwkim/animation.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/allenhwkim/animation.js/issues"
+  },
+  "homepage": "https://github.com/allenhwkim/animation.js#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.0",
+    "@babel/runtime": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "core-js": "^2.5.7",
+    "cross-env": "^5.0.5",
+    "eslint": "^5.14.1",
+    "eslint-config-google": "^0.12.0",
+    "html-custom-elements": "^0.3.2",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.1.0",
+    "kill-port": "^1.3.2",
+    "npm-run-all": "^4.1.5",
+    "pre-commit": "^1.2.2",
+    "prismjs": "^1.16.0",
+    "raw-loader": "^0.5.1",
+    "regenerator-runtime": "^0.13.1",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "wait-on": "^3.2.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
 }
