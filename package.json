@@ -1,6 +1,6 @@
 {
-  "name": "animation.js",
-  "description": "Simple Javascript Animation",
+  "name": "jsanimation",
+  "description": "Simplest Javascript Animation",
   "version": "0.1.0",
   "license": "MIT",
   "main": "src/index.js",

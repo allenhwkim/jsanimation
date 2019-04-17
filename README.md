@@ -9,17 +9,17 @@ Simple Javascript Animation
 ## USAGE
 Install it
 ```
-$ npm install animation.js -D
+$ npm install jsanimation -D
 ```
 Simply import the module into your code and run:
 ```
-import {slideInRight} from 'animation.js';
+import {slideInRight} from 'jsanimation';
 slideInRight(el);
 ```
 
 Or, more 
 ```
-import {Animation, slideInRight} from 'animation.js';
+import {Animation, slideInRight} from 'jsanimation';
 Animation.DURATION = 2000;
 Animation.TIMING = 'Animation.timingFunctions.inOutExpo';
 slideInRight(el);
