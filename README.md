@@ -1,15 +1,41 @@
-# animation
+# animation.js
 
-Simple Javascript Animation
+Simple Javascript Animation 
 
-## Usage with Webpack, Browserify, & Other Bundlers
-If you want to use it with a bundler, install `animation` with npm:
+* Super light( less than 100 lines of code, less than 2KB gzipped)
+* Super fast
+* Expansion in mind
+
+## USAGE
+Install it
 ```
-$ npm install animation --save-dev
+$ npm install animation.js -D
 ```
-Simply import the module into your bundle:
+Simply import the module into your code and run:
 ```
-import 'animation';
+import {slideInRight} from 'animation.js';
+slideInRight(el);
+```
+
+Or, more 
+```
+import {Animation, slideInRight} from 'animation.js';
+Animation.DURATION = 2000;
+Animation.TIMING = 'Animation.timingFunctions.inOutExpo';
+slideInRight(el);
+```
+
+Or, to fully control your animation
+```
+mport {animate} from 'animations.js';
+
+animate(
+  1000,                                     // DURATION
+  function(t) { return Math.pow(t, 1.675) } // timing function
+  function(pct) { el.style.opacity = pct  } // draw function  
+).then(function() {
+  el.removeAttribute('style')
+});
 ```
 
 ## For Developer

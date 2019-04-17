@@ -2,23 +2,22 @@
 
 To fully control your animation, run `animate` function
 
-<pre>
-import {animate} from 'animations.js';
-
+<pre id="animate">
+import {Animation, animate} from 'animations.js';
 const el = document.querySelector('.target');
 
-// run draw function only
-animate(pct => el.style.opacity = pct);
-
-// or durarion, timing as string, and draw function
-animate(1000, 'ease-in-out', pct => el.style.opacity = pct);
-
-// or or durarion, timing function, and draw function
 animate(
-  1000,                          // DURATION
-  t => Math.pow(t, 1.675),       // timing function
-  pct => el.style.opacity = pct  // draw function  
-)
-.then(_ => el.removeAttribute('style'));
-
+  1000,                                     // DURATION
+  function(t) { return Math.pow(t, 1.675) } // timing function
+  function(pct) { el.style.opacity = pct  } // draw function  
+).then(function() {
+  el.removeAttribute('style')
+});
 </pre>
+
+<script>
+(function prettify() {
+  const el = document.querySelector('pre#animate');
+  el.innerHTML = Prism.highlight(el.innerHTML, Prism.languages['javascript'], 'javascript');
+})();
+</script>
