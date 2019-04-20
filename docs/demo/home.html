@@ -1,5 +1,6 @@
 <style>
-.target-container {padding: 40px 0; text-align: center;}
+.target-container {padding: 40px 0; text-align: center; min-height: 96px;}
+.ball { position: absolute; left: 0; border-radius: 50%; background: yellow; width: 48px;}
 .target { font-size: 64px; display: inline-block; width: 100%; color: orange; }
 .selection { display: flex; }
 .selection > * { padding: 4px; flex-grow: 1; flex-basis: 0; }
@@ -13,7 +14,8 @@
 </a>
 
 <div class="target-container">
-  <div class="target"> Animation.js </div>
+  <img class="ball" src="demo/ball.png" />
+  <div class="target"> jsanimation </div>
 </div>
 <div class="selection">
   <div class="duration-ms">
@@ -32,15 +34,14 @@
 
 <a href="javascript:toggleShow()" style="position: relative; bottom: -12px">more/less</a>
 <pre class="show-less visible">
-import {<b class="draw-fn">fadeIn</b>} from 'animation.js';
-<b class="draw-fn">fadeIn</b>(el);
-</pre>
-
+  import {<b class="draw-fn">fadeIn</b>} from 'animation.js';
+  <b class="draw-fn">fadeIn</b>(el);
+</pre> 
 <pre class="show-more">
-import {Animation, <b class="draw-fn">fadeIn</b>} from 'animation.js';
-Animation.DURATION = <b class="duration">250</b>;
-Animation.TIMING = 'Animation.timingFunctions.<b class="timing-fn">easeInOut</b>';
-<b class="draw-fn">fadeIn</b>(el);
+  import {Animation, <b class="draw-fn">fadeIn</b>} from 'animation.js';
+  Animation.DURATION = <b class="duration">250</b>;
+  Animation.TIMING = 'Animation.timingFunctions.<b class="timing-fn">easeInOut</b>';
+  <b class="draw-fn">fadeIn</b>(el);
 </pre>
 
 <script src="demo/home.js"></script>

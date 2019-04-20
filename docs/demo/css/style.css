@@ -1,4 +1,4 @@
-body { margin: 24px; }
+body { margin: 0; padding: 24px; }
 .main {display: flex;}
 .table-of-contents, .contents  {padding: 12px;}
 pre {font-size: 14px; background: #eee;}

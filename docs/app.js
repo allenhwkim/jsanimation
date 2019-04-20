@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "24653685d7f275d31caf";
+/******/ 	var hotCurrentHash = "461c536b44e6289a90ba";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -810,7 +810,6 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Animation = _src__WEBPACK_IMPORTED_MODULE_2__["Animation"];
 window.animate = _src__WEBPACK_IMPORTED_MODULE_2__["animate"];
-window.zoomIn = _src__WEBPACK_IMPORTED_MODULE_2__["zoomIn"];
 
 /***/ }),
 
@@ -4630,60 +4629,60 @@ function _draw(el, transform, opacity) {
   el.style.opacity = opacity;
 }
 
-function dFadeIn(pct) {
-  this.style.opacity = pct;
+function dFadeIn(timing) {
+  this.style.opacity = timing;
 }
 
-function dFadeOut(pct) {
-  this.style.opacity = 1 - pct;
+function dFadeOut(timing) {
+  this.style.opacity = 1 - timing;
 }
 
-function dSlideInLeft(pct) {
-  _draw(this, "translateX(".concat(-100 + pct * 100, "%)"), pct);
+function dSlideInLeft(timing) {
+  _draw(this, "translateX(".concat(-100 + timing * 100, "%)"), timing);
 }
 
-function dSlideOutLeft(pct) {
-  _draw(this, "translateX(".concat(-1 * pct * 100, "%)"), 1 - pct);
+function dSlideOutLeft(timing) {
+  _draw(this, "translateX(".concat(-1 * timing * 100, "%)"), 1 - timing);
 }
 
-function dSlideInRight(pct) {
-  _draw(this, "translateX(".concat(100 - pct * 100, "%)"), pct);
+function dSlideInRight(timing) {
+  _draw(this, "translateX(".concat(100 - timing * 100, "%)"), timing);
 }
 
-function dSlideOutRight(pct) {
-  _draw(this, "translateX(".concat(1 * pct * 100, "%)"), 1 - pct);
+function dSlideOutRight(timing) {
+  _draw(this, "translateX(".concat(1 * timing * 100, "%)"), 1 - timing);
 }
 
-function dSlideInTop(pct) {
-  _draw(this, "translateY(".concat(-100 + pct * 100, "%)"), pct);
+function dSlideInTop(timing) {
+  _draw(this, "translateY(".concat(-100 + timing * 100, "%)"), timing);
 }
 
-function dSlideOutTop(pct) {
-  _draw(this, "translateY(".concat(-1 * pct * 100, "%)"), 1 - pct);
+function dSlideOutTop(timing) {
+  _draw(this, "translateY(".concat(-1 * timing * 100, "%)"), 1 - timing);
 }
 
-function dSlideInBottom(pct) {
-  _draw(this, "translateY(".concat(100 - pct * 100, "%)"), pct);
+function dSlideInBottom(timing) {
+  _draw(this, "translateY(".concat(100 - timing * 100, "%)"), timing);
 }
 
-function dSlideOutBottom(pct) {
-  _draw(this, "translateY(".concat(1 * pct * 100, "%)"), 1 - pct);
+function dSlideOutBottom(timing) {
+  _draw(this, "translateY(".concat(1 * timing * 100, "%)"), 1 - timing);
 }
 
-function dZoomIn(pct) {
-  _draw(this, "scale(".concat(pct, ")"), pct);
+function dZoomIn(timing) {
+  _draw(this, "scale(".concat(timing, ")"), timing);
 }
 
-function dZoomOut(pct) {
-  _draw(this, "scale(".concat(1 - pct, ")"), 1 - pct);
+function dZoomOut(timing) {
+  _draw(this, "scale(".concat(1 - timing, ")"), 1 - timing);
 }
 
-function dRotateIn(pct) {
-  _draw(this, "rotate(".concat(-180 + pct * 180, "deg)"), pct);
+function dRotateIn(timing) {
+  _draw(this, "rotate(".concat(-180 + timing * 180, "deg)"), timing);
 }
 
-function dRotateOut(pct) {
-  _draw(this, "rotate(".concat(pct * 180 * -1, "deg)"), 1 - pct);
+function dRotateOut(timing) {
+  _draw(this, "rotate(".concat(timing * 180 * -1, "deg)"), 1 - timing);
 }
 
 Animation.drawFunctions = {
@@ -4709,10 +4708,10 @@ function animate(duration, timing, draw) {
   var start = performance.now();
   return new Promise(function (resolve) {
     requestAnimationFrame(function animate(time) {
-      var timeFraction = (time - start) / duration;
-      timeFraction > 1 && (timeFraction = 1);
-      draw(timing(timeFraction));
-      timeFraction < 1 ? requestAnimationFrame(animate) : resolve(true);
+      var pct = (time - start) / duration;
+      pct > 1 && (pct = 1);
+      draw(timing(pct), pct);
+      pct < 1 ? requestAnimationFrame(animate) : resolve(true);
     });
   });
 }

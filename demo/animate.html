@@ -9,7 +9,7 @@ const el = document.querySelector('.target');
 animate(
   1000,                                     // DURATION
   function(t) { return Math.pow(t, 1.675) } // timing function
-  function(pct) { el.style.opacity = pct  } // draw function  
+  function(timing, pct) { el.style.opacity = pct  } // draw function  
 ).then(function() {
   el.removeAttribute('style')
 });

@@ -47,5 +47,25 @@ function toggleShow() {
   document.querySelector('.show-less').classList.toggle('visible');
 }
 
+function start() {
+  targetEl.style.display = 'none';
+  animate(1500, Animation.timingFunctions.bounceEaseOut, (timing, pct) => {
+    ballEl.style.transform = `translateY(${timing * 200 - 150}px) rotate(${pct*300}deg)`;
+    ballEl.style.left = `${pct*50}%`;
+  }).then(_ => animate(3000, Animation.timingFunctions.easeOut, (timing, pct) => {
+      ballEl.style.transform = `translateY(50px) rotate(${pct*300}deg)`;
+      ballEl.style.left = `${50 + timing*50}%`;
+    })
+  ).then(_ => animate(1000, Animation.timingFunctions.inExpo, (timing, pct) => {
+      targetEl.style.display = '';
+      targetEl.style.transform = `translateX(${100 - timing*100}%)`;
+      targetEl.style.opacity = timing;
+    })
+  );
+}
+
+const ballEl = document.querySelector('.ball');
+const targetEl = document.querySelector('.target');
 setOptions();
-zoomIn(document.querySelector('.target'));
+start();
+

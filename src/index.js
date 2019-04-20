@@ -35,20 +35,20 @@ Animation.timingFunctions = {
  * draw functions
  */
 function _draw(el, transform, opacity) { el.style.transform = transform; el.style.opacity = opacity; }
-function dFadeIn(pct) { this.style.opacity = pct; }
-function dFadeOut(pct) { this.style.opacity = 1-pct; }
-function dSlideInLeft(pct) { _draw(this, `translateX(${-100+pct*100}%)`, pct); }
-function dSlideOutLeft(pct) { _draw(this, `translateX(${-1*pct*100}%)`, 1-pct); }
-function dSlideInRight(pct) { _draw(this, `translateX(${100 - pct*100}%)`, pct); }
-function dSlideOutRight(pct) { _draw(this, `translateX(${1*pct*100}%)`, 1-pct); }
-function dSlideInTop(pct) { _draw(this, `translateY(${-100+pct*100}%)`, pct); }
-function dSlideOutTop(pct) { _draw(this, `translateY(${-1*pct*100}%)`, 1-pct); }
-function dSlideInBottom(pct) { _draw(this, `translateY(${100 - pct*100}%)`, pct); }
-function dSlideOutBottom(pct) { _draw(this, `translateY(${1*pct*100}%)`, 1-pct); }
-function dZoomIn(pct) { _draw(this, `scale(${pct})`, pct); }
-function dZoomOut(pct) { _draw(this, `scale(${1-pct})`, 1-pct); }
-function dRotateIn(pct) { _draw(this, `rotate(${-180 + pct * 180}deg)`, pct); }
-function dRotateOut(pct) { _draw(this, `rotate(${pct * 180 * -1}deg)`, 1-pct); }
+function dFadeIn(timing) { this.style.opacity = timing; }
+function dFadeOut(timing) { this.style.opacity = 1-timing; }
+function dSlideInLeft(timing) { _draw(this, `translateX(${-100+timing*100}%)`, timing); }
+function dSlideOutLeft(timing) { _draw(this, `translateX(${-1*timing*100}%)`, 1-timing); }
+function dSlideInRight(timing) { _draw(this, `translateX(${100 - timing*100}%)`, timing); }
+function dSlideOutRight(timing) { _draw(this, `translateX(${1*timing*100}%)`, 1-timing); }
+function dSlideInTop(timing) { _draw(this, `translateY(${-100+timing*100}%)`, timing); }
+function dSlideOutTop(timing) { _draw(this, `translateY(${-1*timing*100}%)`, 1-timing); }
+function dSlideInBottom(timing) { _draw(this, `translateY(${100 - timing*100}%)`, timing); }
+function dSlideOutBottom(timing) { _draw(this, `translateY(${1*timing*100}%)`, 1-timing); }
+function dZoomIn(timing) { _draw(this, `scale(${timing})`, timing); }
+function dZoomOut(timing) { _draw(this, `scale(${1-timing})`, 1-timing); }
+function dRotateIn(timing) { _draw(this, `rotate(${-180 + timing * 180}deg)`, timing); }
+function dRotateOut(timing) { _draw(this, `rotate(${timing * 180 * -1}deg)`, 1-timing); }
 Animation.drawFunctions = {
   fadeIn: dFadeIn, fadeOut: dFadeOut, zoomIn: dZoomIn, zoomOut: dZoomOut, rotateIn: dRotateIn, rotateOut: dRotateOut,
   slideInLeft: dSlideInLeft, slideOutleft: dSlideOutLeft, slideInRight: dSlideInRight, slideOutRight: dSlideOutRight,
@@ -63,10 +63,10 @@ function animate(duration, timing, draw) {
   const start = performance.now();
   return new Promise(function(resolve) {
     requestAnimationFrame(function animate(time) {
-      let timeFraction = (time - start) / duration;
-      (timeFraction > 1) && (timeFraction = 1);
-      draw(timing(timeFraction));
-      timeFraction < 1 ? requestAnimationFrame(animate) : resolve(true);
+      let pct = (time - start) / duration;
+      (pct > 1) && (pct = 1);
+      draw(timing(pct), pct);
+      pct < 1 ? requestAnimationFrame(animate) : resolve(true);
     });
   });
 }
