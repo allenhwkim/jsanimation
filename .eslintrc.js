@@ -16,6 +16,7 @@ module.exports = {
     "arrow-parens": 0,
     "block-spacing": 0,
     "brace-style": 0,
+    "comma-dangle": 0,
     "require-jsdoc": 0,
     "guard-for-in": 0,
     "indent": 0,
