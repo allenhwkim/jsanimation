@@ -3,8 +3,8 @@
 .ball { position: absolute; left: 0; width: 64px;}
 .explosion { position: absolute; right: 0; width: 1px; top: 0; bottom: 0;}
 .target { font-size: 64px; display: inline-block; width: 100%; color: orange; }
-.selection { display: flex; }
-.selection > * { padding: 4px; flex-grow: 1; flex-basis: 0; }
+.selection { display: flex; justify-content: center}
+.selection > * { padding: 4px; }
 .selection select { border: none; width: 100%; font-size: 0.85em; outline: 0; }
 .show-more, .show-less { display: none; }
 .show-more.visible, .show-less.visible { display: block; }
@@ -27,19 +27,17 @@
   <div class="duration-ms">
     <b>Duration(ms)</b>
     <select name="duration" onchange="run()"></select>
+    <a href="javascript:document.querySelector('#dialog').open();">code</button>
   </div>
 </div>
 
-<a href="javascript:toggleShow()" style="position: relative; bottom: -12px">more/less</a>
-<pre class="show-less visible">
-  import {<b class="draw-fn">fadeIn</b>} from 'animation.js';
-  <b class="draw-fn">fadeIn</b>(el);
-</pre> 
-<pre class="show-more">
-  import {Animation, <b class="draw-fn">fadeIn</b>} from 'animation.js';
-  Animation.DURATION = <b class="duration">250</b>;
-  Animation.TIMING = 'Animation.timingFunctions.<b class="timing-fn">easeInOut</b>';
-  <b class="draw-fn">fadeIn</b>(el);
-</pre>
+<hce-dialog id="dialog">
+  <pre>
+import {Animation, <b class="draw-fn">fadeIn</b>} from 'animation.js';
+Animation.DURATION = <b class="duration">250</b>; 
+Animation.TIMING = 'Animation.timingFunctions.<b class="timing-fn">easeInOut</b>';
+<b class="draw-fn">fadeIn</b>(el);
+  </pre>
+</hce-dialog>
 
 <script src="demo/home.js"></script>

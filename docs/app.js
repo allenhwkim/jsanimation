@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "461c536b44e6289a90ba";
+/******/ 	var hotCurrentHash = "eb1fe0b9843bc434068d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4540,6 +4540,7 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fadeIn", function() { return fadeIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fadeOut", function() { return fadeOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "slideInLeft", function() { return slideInLeft; });
@@ -4554,219 +4555,161 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "zoomOut", function() { return zoomOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rotateIn", function() { return rotateIn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rotateOut", function() { return rotateOut; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Animation", function() { return Animation; });
-var Animation = {
-  DURATION: 250,
-  TIMING: undefined,
-  timingFunctions: {},
-  drawFunctions: {}
-};
-/**
- * timing functions
- */
-
-function tLinear(k) {
-  return k;
-}
-
-function tEaseIn(k) {
-  return Math.pow(k, 1.675);
-}
-
-function tEaseOut(k) {
-  return 1 - Math.pow(1 - k, 1.675);
-}
-
-function tEaseInOut(k) {
-  return .5 * (Math.sin((k - .5) * Math.PI) + 1);
-}
-
-function tInExpo(n) {
-  return 0 == n ? 0 : Math.pow(1024, n - 1);
-}
-
-function tOutExpo(n) {
-  return 1 == n ? n : 1 - Math.pow(2, -10 * n);
-}
-
-function tInOutExpo(n) {
-  if (0 == n) return 0;
-  if (1 == n) return 1;
-  if ((n *= 2) < 1) return .5 * Math.pow(1024, n - 1);
-  return .5 * (-Math.pow(2, -10 * (n - 1)) + 2);
-}
-
-function tBounceEaseOut(t) {
-  function bounce(t) {
-    for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
-      if (t >= (7 - 4 * a) / 11) {
-        return -Math.pow((11 - 6 * a - 11 * t) / 4, 2) + Math.pow(b, 2);
+var timingFunctions = {
+  linear: function linear(n) {
+    return n;
+  },
+  easeIn: function easeIn(n) {
+    return Math.pow(n, 1.675);
+  },
+  easeOut: function easeOut(n) {
+    return 1 - Math.pow(1 - n, 1.675);
+  },
+  easeInOut: function easeInOut(n) {
+    return .5 * (Math.sin((n - .5) * Math.PI) + 1);
+  },
+  inExpo: function inExpo(n) {
+    return 0 == n ? 0 : Math.pow(1024, n - 1);
+  },
+  outExpo: function outExpo(n) {
+    return 1 == n ? n : 1 - Math.pow(2, -10 * n);
+  },
+  inOutExpo: function inOutExpo(n) {
+    if (0 == n) return 0;
+    if (1 == n) return 1;
+    if ((n *= 2) < 1) return .5 * Math.pow(1024, n - 1);
+    return .5 * (-Math.pow(2, -10 * (n - 1)) + 2);
+  },
+  bounceEaseOut: function bounceEaseOut(n) {
+    function bounce(n) {
+      for (var a = 0, b = 1, result; 1; a += b, b /= 2) {
+        if (n >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * n) / 4, 2) + Math.pow(b, 2);
+        }
       }
     }
+
+    return 1 - bounce(1 - n);
   }
-
-  return 1 - bounce(1 - t);
-}
-
-Animation.TIMING = tLinear;
-Animation.timingFunctions = {
-  linear: tLinear,
-  easeIn: tEaseIn,
-  easeOut: tEaseOut,
-  easeInOut: tEaseInOut,
-  inExpo: tInExpo,
-  outExpo: tOutExpo,
-  inOutExpo: tInOutExpo,
-  bounceEaseOut: tBounceEaseOut
 };
-/**
- * draw functions
- */
 
 function _draw(el, transform, opacity) {
   el.style.transform = transform;
   el.style.opacity = opacity;
 }
 
-function dFadeIn(timing) {
-  this.style.opacity = timing;
-}
+var drawFunctions = {
+  fadeIn: function fadeIn(pct) {
+    this.style.opacity = pct;
+  },
+  fadeOut: function fadeOut(pct) {
+    this.style.opacity = 1 - pct;
+  },
+  slideInLeft: function slideInLeft(pct) {
+    _draw(this, "translateX(".concat(-100 + pct * 100, "%)"), pct);
+  },
+  slideOutLeft: function slideOutLeft(pct) {
+    _draw(this, "translateX(".concat(-1 * pct * 100, "%)"), 1 - pct);
+  },
+  slideInRight: function slideInRight(pct) {
+    _draw(this, "translateX(".concat(100 - pct * 100, "%)"), pct);
+  },
+  slideOutRight: function slideOutRight(pct) {
+    _draw(this, "translateX(".concat(1 * pct * 100, "%)"), 1 - pct);
+  },
+  slideInTop: function slideInTop(pct) {
+    _draw(this, "translateY(".concat(-100 + pct * 100, "%)"), pct);
+  },
+  slideOutTop: function slideOutTop(pct) {
+    _draw(this, "translateY(".concat(-1 * pct * 100, "%)"), 1 - pct);
+  },
+  slideInBottom: function slideInBottom(pct) {
+    _draw(this, "translateY(".concat(100 - pct * 100, "%)"), pct);
+  },
+  slideOutBottom: function slideOutBottom(pct) {
+    _draw(this, "translateY(".concat(1 * pct * 100, "%)"), 1 - pct);
+  },
+  zoomIn: function zoomIn(pct) {
+    _draw(this, "scale(".concat(pct, ")"), pct);
+  },
+  zoomOut: function zoomOut(pct) {
+    _draw(this, "scale(".concat(1 - pct, ")"), 1 - pct);
+  },
+  rotateIn: function rotateIn(pct) {
+    _draw(this, "rotate(".concat(-180 + pct * 180, "deg)"), pct);
+  },
+  rotateOut: function rotateOut(pct) {
+    _draw(this, "rotate(".concat(pct * 180 * -1, "deg)"), 1 - pct);
+  }
+};
 
-function dFadeOut(timing) {
-  this.style.opacity = 1 - timing;
-}
+function runAnimation(el, drawFn) {
+  return animate.bind(el)(Animation.DURATION, Animation.TIMING, drawFunctions[drawFnName]);
+} // return promise, so that user can take after action
 
-function dSlideInLeft(timing) {
-  _draw(this, "translateX(".concat(-100 + timing * 100, "%)"), timing);
-}
 
-function dSlideOutLeft(timing) {
-  _draw(this, "translateX(".concat(-1 * timing * 100, "%)"), 1 - timing);
-}
-
-function dSlideInRight(timing) {
-  _draw(this, "translateX(".concat(100 - timing * 100, "%)"), timing);
-}
-
-function dSlideOutRight(timing) {
-  _draw(this, "translateX(".concat(1 * timing * 100, "%)"), 1 - timing);
-}
-
-function dSlideInTop(timing) {
-  _draw(this, "translateY(".concat(-100 + timing * 100, "%)"), timing);
-}
-
-function dSlideOutTop(timing) {
-  _draw(this, "translateY(".concat(-1 * timing * 100, "%)"), 1 - timing);
-}
-
-function dSlideInBottom(timing) {
-  _draw(this, "translateY(".concat(100 - timing * 100, "%)"), timing);
-}
-
-function dSlideOutBottom(timing) {
-  _draw(this, "translateY(".concat(1 * timing * 100, "%)"), 1 - timing);
-}
-
-function dZoomIn(timing) {
-  _draw(this, "scale(".concat(timing, ")"), timing);
-}
-
-function dZoomOut(timing) {
-  _draw(this, "scale(".concat(1 - timing, ")"), 1 - timing);
-}
-
-function dRotateIn(timing) {
-  _draw(this, "rotate(".concat(-180 + timing * 180, "deg)"), timing);
-}
-
-function dRotateOut(timing) {
-  _draw(this, "rotate(".concat(timing * 180 * -1, "deg)"), 1 - timing);
-}
-
-Animation.drawFunctions = {
-  fadeIn: dFadeIn,
-  fadeOut: dFadeOut,
-  zoomIn: dZoomIn,
-  zoomOut: dZoomOut,
-  rotateIn: dRotateIn,
-  rotateOut: dRotateOut,
-  slideInLeft: dSlideInLeft,
-  slideOutleft: dSlideOutLeft,
-  slideInRight: dSlideInRight,
-  slideOutRight: dSlideOutRight,
-  slideInTop: dSlideInTop,
-  slideOutTop: dSlideOutTop,
-  slideInBottom: dSlideInBottom,
-  slideOutBottom: dSlideOutBottom
-}; // return promise, so that user can take after action
-
-function animate(duration, timing, draw) {
+function animate(duration, timingFn, draw) {
   duration = duration || 250;
-  timing = timing || Animation.timingFunctions.easeInOut;
+  timingFn = timingFn || timingFunctions.easeInOut;
   var start = performance.now();
   return new Promise(function (resolve) {
     requestAnimationFrame(function animate(time) {
-      var pct = (time - start) / duration;
-      pct > 1 && (pct = 1);
-      draw(timing(pct), pct);
-      pct < 1 ? requestAnimationFrame(animate) : resolve(true);
+      var timeFraction = (time - start) / duration;
+      timeFraction > 1 && (timeFraction = 1);
+      draw(timingFn(timeFraction), timeFraction);
+      timeFraction < 1 ? requestAnimationFrame(animate) : resolve(true);
     });
   });
 }
-/**
- * public users functions
- */
-
-
-function __ani(el, drawFn) {
-  return animate(Animation.DURATION, Animation.TIMING, drawFn.bind(el));
+function fadeIn(el) {
+  runAnimation(el, 'fadeIn');
 }
-
-var fadeIn = function fadeIn(el) {
-  return __ani(el, dFadeIn);
+function fadeOut(el) {
+  runAnimation(el, 'fadeOut');
+}
+function slideInLeft(el) {
+  runAnimation(el, 'slideInLeft');
+}
+function slideOutLeft(el) {
+  runAnimation(el, 'slideOutLeft');
+}
+function slideInRight(el) {
+  runAnimation(el, 'slideInRight');
+}
+function slideOutRight(el) {
+  runAnimation(el, 'slideOutRight');
+}
+function slideInTop(el) {
+  runAnimation(el, 'slideInTop');
+}
+function slideOutTop(el) {
+  runAnimation(el, 'slideOutTop');
+}
+function slideInBottom(el) {
+  runAnimation(el, 'slideInBottom');
+}
+function slideOutBottom(el) {
+  runAnimation(el, 'slideOutBottom');
+}
+function zoomIn(el) {
+  runAnimation(el, 'zoomIn');
+}
+function zoomOut(el) {
+  runAnimation(el, 'zoomOut');
+}
+function rotateIn(el) {
+  runAnimation(el, 'rotateIn');
+}
+function rotateOut(el) {
+  runAnimation(el, 'rotateIn');
+}
+var Animation = {
+  DURATION: 250,
+  TIMING: timingFunctions.linear,
+  timingFunctions: timingFunctions,
+  drawFunctions: drawFunctions
 };
-var fadeOut = function fadeOut(el) {
-  return __ani(el, dFadeOut);
-};
-var slideInLeft = function slideInLeft(el) {
-  return __ani(el, dSlideInLeft);
-};
-var slideOutLeft = function slideOutLeft(el) {
-  return __ani(el, dSlideOutLeft);
-};
-var slideInRight = function slideInRight(el) {
-  return __ani(el, dSlideInRight);
-};
-var slideOutRight = function slideOutRight(el) {
-  return __ani(el, dSlideOutRight);
-};
-var slideInTop = function slideInTop(el) {
-  return __ani(el, dSlideInTop);
-};
-var slideOutTop = function slideOutTop(el) {
-  return __ani(el, dSlideOutTop);
-};
-var slideInBottom = function slideInBottom(el) {
-  return __ani(el, dSlideInBottom);
-};
-var slideOutBottom = function slideOutBottom(el) {
-  return __ani(el, dSlideOutBottom);
-};
-var zoomIn = function zoomIn(el) {
-  return __ani(el, dZoomIn);
-};
-var zoomOut = function zoomOut(el) {
-  return __ani(el, dZoomOut);
-};
-var rotateIn = function rotateIn(el) {
-  return __ani(el, dRotateIn);
-};
-var rotateOut = function rotateOut(el) {
-  return __ani(el, dRotateIn);
-};
-
 
 /***/ })
 

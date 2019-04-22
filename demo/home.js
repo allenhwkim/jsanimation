@@ -1,3 +1,4 @@
+
 function setOptions() {
   const durationEl = document.querySelector('.selection .duration-ms select');
   [1000, 250, 500, 2000, 3000, 5000].forEach((key) => {
@@ -42,12 +43,10 @@ function run(key) {
     });
 }
 
-function toggleShow() {
-  document.querySelector('.show-more').classList.toggle('visible');
-  document.querySelector('.show-less').classList.toggle('visible');
-}
-
 function start() {
+  const ballEl = document.querySelector('.ball');
+  const targetEl = document.querySelector('.target');
+  const explosionEl = document.querySelector('.explosion');
   targetEl.style.display = 'none';
   animate(1500, Animation.timingFunctions.bounceEaseOut, (timing, pct) => {
     ballEl.style.transform = `translateY(${timing * 200 - 150}px) rotate(${pct*300}deg)`;
@@ -73,9 +72,6 @@ function start() {
   });
 }
 
-const ballEl = document.querySelector('.ball');
-const targetEl = document.querySelector('.target');
-const explosionEl = document.querySelector('.explosion');
 setOptions();
 start();
 

@@ -1,9 +1,10 @@
 body { margin: 0; padding: 24px; }
-.main {display: flex;}
 .table-of-contents, .contents  {padding: 12px;}
 pre {font-size: 14px; background: #eee;}
 hce-tabs {padding: 24px;} 
 hce-tabs .contents pre {margin: 0; padding: 12px; white-space: pre-wrap;}
 div[contents-for] b, pre b {background: rgba(255, 255, 0, 0.3);}
-hce-dyn-contents { max-width: 800px; margin: 0 auto; }
+hce-dyn-contents, .menu { display: block; max-width: 800px; margin: 0 auto; }
+.menu { display: flex; }
+.menu .icons { flex: 1; text-align: right; }
 

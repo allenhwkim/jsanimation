@@ -56,16 +56,26 @@ function start() {
       ballEl.style.transform = `translateY(50px) rotate(${pct*300}deg)`;
       ballEl.style.left = `${50 + timing*50}%`;
     })
-  ).then(_ => animate(1000, Animation.timingFunctions.inExpo, (timing, pct) => {
+  ).then(_ => animate(300, Animation.timingFunctions.outExpo, timing => {
+      ballEl.style.display = 'none';
+      explosionEl.style.width = `${timing*600}px`;
+      explosionEl.style.top = `-${timing*250}px`;
+      explosionEl.style.right = `-${timing*250}px`;
+    })
+  ).then(_ => animate(1000, Animation.timingFunctions.inExpo, timing => {
+      explosionEl.style.opacity = Math.max(0, 1 - timing*5);
       targetEl.style.display = '';
       targetEl.style.transform = `translateX(${100 - timing*100}%)`;
       targetEl.style.opacity = timing;
     })
-  );
+  ).then( _ => {
+    explosionEl.style.display = 'none';
+  });
 }
 
 const ballEl = document.querySelector('.ball');
 const targetEl = document.querySelector('.target');
+const explosionEl = document.querySelector('.explosion');
 setOptions();
 start();
 
