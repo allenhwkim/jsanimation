@@ -4,16 +4,20 @@
 .explosion { position: absolute; right: 0; width: 1px; top: 0; bottom: 0;}
 .target { font-size: 64px; display: inline-block; width: 100%; color: orange; }
 .selection { display: flex; justify-content: center}
-.selection > * { padding: 4px; }
+.selection > * { padding: 4px; width: 200px; }
 .selection select { border: none; width: 100%; font-size: 0.85em; outline: 0; }
 .show-more, .show-less { display: none; }
 .show-more.visible, .show-less.visible { display: block; }
+.center {text-align: center;}
 </style>
 
 <div class="target-container">
   <img class="ball" src="demo/bomb.png" />
   <div class="target"> jsanimation </div>
   <img class="explosion" src="demo/explosion.png" />
+</div>
+<div class="center">
+  <a href="javascript:document.querySelector('#dialog').open();">code</a>
 </div>
 <div class="selection">
   <div class="draw">
@@ -27,7 +31,6 @@
   <div class="duration-ms">
     <b>Duration(ms)</b>
     <select name="duration" onchange="run()"></select>
-    <a href="javascript:document.querySelector('#dialog').open();">code</button>
   </div>
 </div>
 

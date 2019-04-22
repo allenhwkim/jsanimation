@@ -7,4 +7,5 @@ div[contents-for] b, pre b {background: rgba(255, 255, 0, 0.3);}
 hce-dyn-contents, .menu { display: block; max-width: 800px; margin: 0 auto; }
 .menu { display: flex; }
 .menu .icons { flex: 1; text-align: right; }
+.footer {text-align: center;}
 

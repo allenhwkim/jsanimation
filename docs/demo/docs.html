@@ -1,0 +1,117 @@
+<h3>Dead Simple</h3>
+Hundreds of animations only with less than 80 lines of libaray code.
+
+<h2>`animate` function</h2>
+Run animation within certain duration and interval with given drawing function.
+
+Example: 
+<pre id="animate">
+import {animate} from 'animations.js';
+const el = document.querySelector('.target');
+
+animate(
+  1000,                                     // DURATION
+  function(t) { return Math.pow(t, 1.675) } // timing function
+  function(timing, pct) { el.style.opacity = pct  } // draw function  
+).then(function() {
+  el.removeAttribute('style')
+});
+</pre>
+<script>
+(function prettify() {
+  const el = document.querySelector('pre#animate');
+  el.innerHTML = Prism.highlight(el.innerHTML, Prism.languages['javascript'], 'javascript');
+})();
+</script>
+
+<h3>Arguments</h3>
+<ul>
+  <li><b>duration</b>: integer, default 250, animation duration in milliseconds</li>
+  <li><b>timing</b>: a function that determines the interval of the animation
+    timing function, which accepts fraction of duration as a paramter and returns a number.
+    For example, linear timing function looks like the following, which making animation interval spread evenly. 
+    <pre>
+      function(t) { return t;} 
+    </pre>
+    Hoever, easein timing function looks like the following making animation interval more natural like power-applied.
+    <pre>
+     function(t) { return Math.pow(t, 1.675); }
+    </pre>
+    From the above function, `t` is a float number between 0 to 1.
+  </li>
+  <li>
+    <b>draw</b>: a function to run animation which accepts result of timing and progress as arguments
+    Foe example,
+    <pre>
+    function(timing, progress) {
+      ballEl.style.transform = `translateY(${timing * 200 - 150}px) rotate(${pct*300}deg)`;
+      ballEl.style.left = `${progress*50}%`;
+    } 
+    </pre>
+    From the above function, timing/progress is a float number between 0 to 1.
+  </li>
+</ul>
+
+<h3>Returns</h3>
+A Promise is returned when animation ends.
+
+<h2>`Animation` Object</h2>
+Object to control browser animations, which utilizes `animate` function 
+
+<h3>Properties</h3>
+<ul>
+  <li><b>DURAION</b>: Animation Duration </li>
+  <li><b>TIMING</b>: Function for animation timing</li>
+  <li>
+    <b>timingFunctions</b>: Intervals that animation applies
+    <ul>
+      <li><b>linear</b>: . . . . . . . . . . . . . . . . . . . . . . </li>
+      <li><b>easeIn</b>: .    .   .   .  .  . . . . . . . . . . . . . </li>
+      <li><b>easeOut</b>: . . . . . . . . . . . .  .  .   .   .    . </li>
+      <li><b>inExpo</b>: .     .    .   .  . . . . . ................. </li>
+      <li><b>outExpo</b>: ............... . . . . . .  .   .    .     . </li>
+      <li><b>inOutExpo</b>: .     .    .   .  . ......... . . .   .    .     .</li>
+      <li><b>bounceEaseOut</b>: ball bouncing effect</li>
+    </ul>
+  </li>
+  <li>
+    <b>drawFunctions</b>: 
+    Visual animation functions
+    <ul>
+      <li><b>fadeIn</b>: fades in
+      <li><b>fadeOut</b>: fades out
+      <li><b>slideInLeft</b>: slide in from left / fades in
+      <li><b>slideOutLeft</b>: slide out to left / fades out
+      <li><b>slideInRight</b>: slide in from right / fades in
+      <li><b>slideOutRight</b>: slides outs to right / fades out 
+      <li><b>slideInTop</b>: slide in from top / fades in
+      <li><b>slideOutTop</b>: slide out to top / fades out
+      <li><b>slideInBottom</b>: slide in from bottom / fades in
+      <li><b>slideOutBottom</b>: slide out to bottom / fades out
+      <li><b>zoomIn</b>: zoom in / fades in
+      <li><b>zoomOut</b>: zoom out / fades out
+      <li><b>rotateIn</b>: rotates in clock-wise / fades in
+      <li><b>rotateOut</b>: rotates out counter clock-wise / fades out
+    </ul>
+  </li>
+</ul>
+
+<h2>Shortcut Functions</h2>
+The following functions accepts an element as an argument and runs the animation within the scope of `Animation` object.
+Then, it returns a Promise when the animation is finished.
+<ul>
+  <li><b>fadeIn(el)</b>: fades in the  element
+  <li><b>fadeOut(el)</b>: fades out the  element
+  <li><b>slideInLeft(el)</b></b>: slide in from left / fades in the  element
+  <li><b>slideOutLeft(el)</b>: slide out to left / fades out the  element
+  <li><b>slideInRight(el)</b>: slide in from right / fades in the  element
+  <li><b>slideOutRight(el)</b>: slides outs to right / fades out the  element
+  <li><b>slideInTop(el)</b>: slide in from top / fades in the  element
+  <li><b>slideOutTop(el)</b>: slide out to top / fades out the  element
+  <li><b>slideInBottom(el)</b>: slide in from bottom / fades in the  element
+  <li><b>slideOutBottom(el)</b>: slide out to bottom / fades out the  element
+  <li><b>zoomIn(el)</b>: zoom in / fades in the  element
+  <li><b>zoomOut(el)</b>: zoom out / fades out the  element
+  <li><b>rotateIn(el)</b>: rotates in clock-wise / fades in the  element
+  <li><b>rotateOut(el)</b>: rotates out counter clock-wise / fades out the  element
+</ul>
