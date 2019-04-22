@@ -1,12 +1,46 @@
-<h3>Dead Simple</h3>
-Hundreds of animations only with less than 80 lines of libaray code.
+<style>
+.timing-functions li { white-space: pre; font-family: courier;}
+.toc {list-style: none;}
+</style>
 
+<h1>Documentation</h1>
+
+<ul class="toc">
+  <li><a href="javascript:document.querySelector('a[name=install').scrollIntoView()">Install</a>
+  <li><a href="javascript:document.querySelector('a[name=usage').scrollIntoView()">Usage</a>
+  <li><a href="javascript:document.querySelector('a[name=animate').scrollIntoView()">animate function</a>
+  <li><a href="javascript:document.querySelector('a[name=animation').scrollIntoView()">Animation Object</a>
+  <li><a href="javascript:document.querySelector('a[name=shortcuts').scrollIntoView()">shortcut Function</a>
+</ul>
+
+Dead simple! Hundreds of animations only with 
+<a href="https://github.com/allenhwkim/jsanimation/blob/master/src/index.js">
+  less than 80 lines of libaray code.
+</a>
+
+<a name="install"></a>
+<h2>Install</h2>
+<pre>
+  $ npm install jsanimation -D
+</pre>
+
+<a name="usage"></a>
+<h2>Usage</h2>
+<pre>
+import {fadeIn} from 'jsanimation';
+
+fadeIn(document.querySelector('.target'));
+// You can set timing and duration for the animation with Animation Object
+// Or, you can run fully-customized animation with `animate(...)` function
+</pre>
+
+<a name="animate"></a>
 <h2>`animate` function</h2>
 Run animation within certain duration and interval with given drawing function.
 
 Example: 
 <pre id="animate">
-import {animate} from 'animations.js';
+import {animate} from 'jsanimation';
 const el = document.querySelector('.target');
 
 animate(
@@ -55,6 +89,7 @@ animate(
 <h3>Returns</h3>
 A Promise is returned when animation ends.
 
+<a name="animation"></a>
 <h2>`Animation` Object</h2>
 Object to control browser animations, which utilizes `animate` function 
 
@@ -64,10 +99,10 @@ Object to control browser animations, which utilizes `animate` function
   <li><b>TIMING</b>: Function for animation timing</li>
   <li>
     <b>timingFunctions</b>: Intervals that animation applies
-    <ul>
+    <ul class="timing-functions">
       <li><b>linear</b>: . . . . . . . . . . . . . . . . . . . . . . </li>
       <li><b>easeIn</b>: .    .   .   .  .  . . . . . . . . . . . . . </li>
-      <li><b>easeOut</b>: . . . . . . . . . . . .  .  .   .   .    . </li>
+      <li><b>easeOut</b>:<span> . . . . . . . . . . . .  .  .   .   .    .</span> </li>
       <li><b>inExpo</b>: .     .    .   .  . . . . . ................. </li>
       <li><b>outExpo</b>: ............... . . . . . .  .   .    .     . </li>
       <li><b>inOutExpo</b>: .     .    .   .  . ......... . . .   .    .     .</li>
@@ -76,26 +111,11 @@ Object to control browser animations, which utilizes `animate` function
   </li>
   <li>
     <b>drawFunctions</b>: 
-    Visual animation functions
-    <ul>
-      <li><b>fadeIn</b>: fades in
-      <li><b>fadeOut</b>: fades out
-      <li><b>slideInLeft</b>: slide in from left / fades in
-      <li><b>slideOutLeft</b>: slide out to left / fades out
-      <li><b>slideInRight</b>: slide in from right / fades in
-      <li><b>slideOutRight</b>: slides outs to right / fades out 
-      <li><b>slideInTop</b>: slide in from top / fades in
-      <li><b>slideOutTop</b>: slide out to top / fades out
-      <li><b>slideInBottom</b>: slide in from bottom / fades in
-      <li><b>slideOutBottom</b>: slide out to bottom / fades out
-      <li><b>zoomIn</b>: zoom in / fades in
-      <li><b>zoomOut</b>: zoom out / fades out
-      <li><b>rotateIn</b>: rotates in clock-wise / fades in
-      <li><b>rotateOut</b>: rotates out counter clock-wise / fades out
-    </ul>
+    Visual animation functions for internal usage.
   </li>
 </ul>
 
+<a name="shortcuts"></a>
 <h2>Shortcut Functions</h2>
 The following functions accepts an element as an argument and runs the animation within the scope of `Animation` object.
 Then, it returns a Promise when the animation is finished.
